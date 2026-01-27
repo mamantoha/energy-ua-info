@@ -52,6 +52,8 @@ This will fetch and display the outage schedule for Kharkiv, group 6, subgroup 1
 
 ## Output Example
 
+![screenshot](screenshot.png)
+
 ## Contributing
 
 1. Fork it (<https://github.com/mamantoha/energy-ua-info/fork>)
