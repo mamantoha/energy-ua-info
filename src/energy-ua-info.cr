@@ -81,7 +81,7 @@ def print_timeline(periods : Periods)
   periods_ranges = periods.map(&.time_range)
 
   separator = "│"
-  block = "▓"
+  block = "█"
 
   96.times do |i|
     block_time = now.at_beginning_of_day + (i * 15).minutes
