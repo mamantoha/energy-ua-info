@@ -1,0 +1,13 @@
+name: energy-ua-info
+version: 0.1.0
+
+authors:
+  - Anton Maminov <anton.maminov@gmail.com>
+
+targets:
+  energy-ua-info:
+    main: src/energy-ua-info.cr
+
+crystal: '>= 1.0.0'
+
+license: MIT
