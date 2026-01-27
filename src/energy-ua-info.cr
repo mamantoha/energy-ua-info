@@ -183,8 +183,9 @@ title_regex = /<h1 class="main_header">(.*)<\/h1>/
 
 if m = response.body.match(title_regex)
   puts m[1].colorize.bold.underline
-  puts
 end
+puts url
+puts
 
 puts "Поточний час: #{Time.local.to_s("%Y-%m-%d %H:%M")}"
 puts "#{group} група (#{subgroup} підгрупа)"
