@@ -81,6 +81,7 @@ def print_timeline(periods : Periods)
   periods_ranges = periods.map(&.time_range)
 
   separator = "│"
+  block = "▓"
 
   96.times do |i|
     block_time = now.at_beginning_of_day + (i * 15).minutes
@@ -88,11 +89,11 @@ def print_timeline(periods : Periods)
     is_now = (now.hour * 4 + (now.minute // 15)) == i
 
     if is_now
-      timeline[i] = (in_outage ? "█".colorize(:light_red) : "░".colorize(:light_green))
+      timeline[i] = (in_outage ? block.colorize(:light_red) : block.colorize(:light_green))
     elsif in_outage
-      timeline[i] = "█".colorize(:red)
+      timeline[i] = block.colorize(:red)
     else
-      timeline[i] = "░".colorize(:green)
+      timeline[i] = block.colorize(:green)
     end
   end
 
