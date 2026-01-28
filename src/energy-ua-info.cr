@@ -85,7 +85,7 @@ def print_timeline(periods : Periods, time : Time = Time.local)
   96.times do |i|
     block_time = time.at_beginning_of_day + (i * 15).minutes
     in_outage = periods.any? { |period| block_time >= period.time_from && block_time < period.time_to }
-    is_now = (time.hour * 4 + (time.minute // 15)) == i
+    is_now = same_date?(time) && (time.hour * 4 + (time.minute // 15)) == i
 
     if is_now
       timeline[i] = (in_outage ? block.colorize(:light_red) : block.colorize(:light_green))
@@ -134,6 +134,12 @@ def next_turn_on(periods : Periods) : Period?
   return unless next_turn_ons.present?
 
   next_turn_ons.min_by(&.time_to)
+end
+
+def same_date?(time : Time, other : Time = Time.local) : Bool
+  time.year == other.year &&
+    time.month == other.month &&
+    time.day == other.day
 end
 
 option_parser = OptionParser.parse do |parser|
