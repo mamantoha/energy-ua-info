@@ -74,19 +74,18 @@ def print_periods(periods : Periods, title : String)
   end
 end
 
-def print_timeline(periods : Periods)
+def print_timeline(periods : Periods, time : Time = Time.local)
   # 96 blocks, one per 15 minutes
   timeline = Array(String | Colorize::Object(String)).new(96, "")
-  now = Time.local
   periods_ranges = periods.map(&.time_range)
 
   separator = "│"
   block = "█"
 
   96.times do |i|
-    block_time = now.at_beginning_of_day + (i * 15).minutes
+    block_time = time.at_beginning_of_day + (i * 15).minutes
     in_outage = periods.any? { |period| block_time >= period.time_from && block_time < period.time_to }
-    is_now = (now.hour * 4 + (now.minute // 15)) == i
+    is_now = (time.hour * 4 + (time.minute // 15)) == i
 
     if is_now
       timeline[i] = (in_outage ? block.colorize(:light_red) : block.colorize(:light_green))
