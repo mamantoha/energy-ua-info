@@ -227,4 +227,6 @@ if m = response.body.match(tomorrow_regex)
   end
 
   print_periods(tomorrow_periods, "завтра")
+  puts
+  print_timeline(tomorrow_periods, Time.local + 1.day)
 end
