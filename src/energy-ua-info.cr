@@ -46,12 +46,13 @@ end
 def print_periods(periods : Periods, title : String)
   puts
 
+  puts "Відключення #{title}".colorize.underline
+  puts
+
   if periods.empty?
     puts "Немає даних"
     exit 1
   end
-
-  puts "Відключення #{title}".colorize.underline
 
   without_electricity = periods.sum(&.length)
 
@@ -60,7 +61,6 @@ def print_periods(periods : Periods, title : String)
 
   puts "#{without_electricity_formatted} #{with_electricity_formatted}"
 
-  puts
   puts "Періоди відключень на #{title}:"
 
   periods.each do |period|
