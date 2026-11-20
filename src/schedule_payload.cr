@@ -22,6 +22,26 @@ end
 alias Periods = Array(Period)
 
 class SchedulePayload
+  # <script id="schedulePayload" type="application/json">
+  #   {
+  #     "today": [
+  #       {"from": 630, "to": 960, "status": "red"},
+  #       {"from": 1260, "to": 1440, "status": "red"}
+  #     ],
+  #     "tomorrow": [],
+  #     "tomorrowAvailable": false,
+  #     "currentTime": 1795166440,
+  #     "dates": {
+  #       "today": "20.11.2026",
+  #       "tomorrow": "21.11.2026"
+  #     },
+  #     "nextEventTimestamp": 1795183200,
+  #     "isCurrentlyOff": true,
+  #     "isEmergency": false
+  #   }
+  # </script>
+  SCRIPT_REGEX = /<script\b[^>]*\bid\s*=\s*["']schedulePayload["'][^>]*>(.*?)<\/script\s*>/m
+
   getter today : Periods
   getter tomorrow : Periods
   getter? tomorrow_available : Bool
@@ -29,7 +49,7 @@ class SchedulePayload
   getter tomorrow_date : Time
 
   def initialize(html : String)
-    match = html.match(/<script\b[^>]*\bid\s*=\s*["']schedulePayload["'][^>]*>(.*?)<\/script\s*>/m)
+    match = html.match(SCRIPT_REGEX)
     raise "Не знайдено schedulePayload" unless match
 
     payload = JSON.parse(match[1])
